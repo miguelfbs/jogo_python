@@ -33,74 +33,27 @@ q7 = 77
 q8 = 88
 q9 = 99
 
-while running:
-    # controle de enventos no jgo
-    for event in pygame.event.get():
-        # pygame.QUIT significa que quando usuário clicar em X a tela fechará
-        if event.type == pygame.QUIT:
-            running = False
-        # pygame.MOUSEBUTTONDOWN significa evento de click do mouse
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            print(rodadas)
-            click_pos = pygame.mouse.get_pos()
-            # print ('coordenada_x ', click_pos[0])
-            # print ('coordenada_y ', click_pos[1])
-            coordenada_x = click_pos[0]
-            coordenada_y = click_pos[1]
+tabuleiro_desenhado = False
 
-            # if personagem == personagem_x:
-            #     personagem = personagem_o
-            # else:
-            #     personagem = personagem_x
+def desenha_tabuleiro(espessura,cor):
+    #tabuleiro  
+    pygame.draw.line(screen, cor, (200, 20), (200, 580), espessura)
+    pygame.draw.line(screen, cor, (400, 20), (400, 580), espessura)
+    pygame.draw.line(screen, cor, (20, 200), (580, 200), espessura)
+    pygame.draw.line(screen, cor, (20, 400), (580, 400), espessura)
 
-            rodadas = rodadas + 1
-            if (rodadas > 9):
-                screen.fill ('#F5F5F5')
-                rodadas = 0
-            
-            # if rodadas != 1:
-            #     if personagem == personagem_x:
-            #         personagem = personagem_o
-            #     else:
-            #         personagem = personagem_x
-            # else:
-            #     personagem = personagem_x
+def faz_jogada():
+    global q1
+    global q2
+    global q3
+    global q4
+    global q5
+    global q6
+    global q7
+    global q8
+    global q9
 
-            if rodadas == 0:
-                personagem = personagem_0
-            elif rodadas == 1:
-                personagem = personagem_x
-            elif rodadas == 2: 
-                personagem = personagem_o
-            elif rodadas == 3: 
-                personagem = personagem_x
-            elif rodadas == 4: 
-                personagem = personagem_o
-            elif rodadas == 5: 
-                personagem = personagem_x
-            elif rodadas == 6: 
-                personagem = personagem_o
-            elif rodadas == 7: 
-                personagem = personagem_x
-            elif rodadas == 8: 
-                personagem = personagem_o
-            elif rodadas == 9: 
-                personagem = personagem_x
-
-
-        
-#  #tabuleiro  
-#                                        origem     destino
-#                                        (coordenada_x , coordenada_y)    (coordenada_x , coordenada_y)
-    # screen.fill('#F0F8FF')
-    pygame.draw.line(screen, '#FFD700', (200, 20), (200, 580), 10)
-    pygame.draw.line(screen, '#FFD700', (400, 20), (400, 580), 10)
-    pygame.draw.line(screen, '#FFD700', (20, 200), (580, 200), 10)
-    pygame.draw.line(screen, '#FFD700', (20, 400), (580, 400), 10)
-
-
-#posição personagens 
-
+    #posição personagens 
     if coordenada_x < 200 and coordenada_x > 0 and coordenada_y < 200:
         screen.blit(personagem,(60, 30)) #1 
         if personagem == personagem_x:
@@ -163,10 +116,107 @@ while running:
             q9 = 1
         else:
             q9 = 2
+    
+
+while running:
+
+    # controle de enventos no jgo
+    for event in pygame.event.get():
+        # pygame.QUIT significa que quando usuário clicar em X a tela fechará
+        if event.type == pygame.QUIT:
+            running = False
+        # pygame.MOUSEBUTTONDOWN significa evento de click do mouse
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            print(rodadas)
+            click_pos = pygame.mouse.get_pos()
+            coordenada_x = click_pos[0]
+            coordenada_y = click_pos[1]
+
+            rodadas = rodadas + 1
+            if (rodadas > 9):
+                screen.fill ('#F5F5F5')
+                rodadas = 0
+                tabuleiro_desenhado = False
+            
+            # if rodadas != 1:
+            #     if personagem == personagem_x:
+            #         personagem = personagem_o
+            #     else:
+            #         personagem = personagem_x
+            # else:
+            #     personagem = personagem_x
+
+            if rodadas == 0:
+                personagem = personagem_0
+            elif rodadas == 1:
+                personagem = personagem_x
+            elif rodadas == 2: 
+                personagem = personagem_o
+            elif rodadas == 3: 
+                personagem = personagem_x
+            elif rodadas == 4: 
+                personagem = personagem_o
+            elif rodadas == 5: 
+                personagem = personagem_x
+            elif rodadas == 6: 
+                personagem = personagem_o
+            elif rodadas == 7: 
+                personagem = personagem_x
+            elif rodadas == 8: 
+                personagem = personagem_o
+            elif rodadas == 9: 
+                personagem = personagem_x
+
+            faz_jogada()
+
+#jogo
+    if tabuleiro_desenhado == False:
+        desenha_tabuleiro(10,'#FFD700')
+        tabuleiro_desenhado = True
+
+    # if rodadas == 0 and tabuleiro_desenhado == False:
+    #     desenha_tabuleiro(10,'#FFD700')
+        
 
 
     #vencedor
-    # if q1 != q2 != q3 != q4 != q5 != q6 != q7 != q8 != q9:
+
+    if q1 == q2 == q3:
+        rodadas = 9
+        q1 = 11
+        q2 = 22
+        q3 = 33
+        pygame.draw.line(screen, '#FFD700', (20, 100), (580, 100), 10)
+
+    if q4 == q5 == q6:
+        rodadas = 9
+        q4 = 44
+        q5 = 55
+        q6 = 66
+        pygame.draw.line(screen, '#FFD700', (20, 300), (580, 300), 10)
+
+    elif q7 == q8 == q9:
+        rodadas = 9
+        q7 = 77
+        q8 = 88
+        q9 = 99
+        pygame.draw.line(screen, '#FFD700', (20, 500), (580, 500), 10)
+
+    elif q3 == q5 == q7:
+        rodadas = 9
+        q7= 77
+        q5 = 55
+        q3 = 33
+        pygame.draw.line(screen, '#FFD700', (30, 570), (570, 30), 15)
+    
+    elif q1 == q4 == q7:
+        rodadas = 9
+        q1 = 11
+        q4 = 44
+        q7 = 77
+        pygame.draw.line(screen, '#FFD700', (20, 100), (20, 500), 10)
+
+    # else:
     #     q1 = 11
     #     q2 = 22
     #     q3 = 33
@@ -175,15 +225,7 @@ while running:
     #     q6 = 66
     #     q7 = 77
     #     q8 = 88
-    #     q9 = 99
-
-    if q1 == q2 == q3:
-        rodadas = 9
-        q1 = 11
-        q2 = 22
-        q3 = 33
-        pygame.draw.line(screen, '#FFD700', (20, 100), (580, 100), 10)
-            
+    #     q9 = 99  
 
     # flip() o display para atualizar a página
     pygame.display.flip()
