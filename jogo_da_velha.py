@@ -23,7 +23,6 @@ tabuleiro_desenhado = False
 coordenada_x = 0
 coordenada_y = 0
 
-
 q1 = ''
 q2 = ''
 q3 = ''
@@ -139,7 +138,7 @@ while running:
         q2 = ''
         q3 = ''
         tabuleiro_desenhado = False
-        pygame.draw.line(screen, '#EEE2DE', (20, 100), (580, 100), 10)   
+        pygame.draw.line(screen, '#EEE2DE', (20, 100), (580, 100), 10) 
 
     if q4 == q5 == q6 != '':
         rodadas = 9
@@ -167,7 +166,7 @@ while running:
         q1 = ''
         q4 = ''
         q7 = ''
-        pygame.draw.line(screen, '#EEE2DE', (20, 100), (20, 500), 10)
+        pygame.draw.line(screen, '#EEE2DE', (100, 20), (100, 580), 10)
 
     elif q1 == q5 == q9 != '':
         rodadas = 9
@@ -181,7 +180,15 @@ while running:
         q2 = ''
         q5 = ''
         q8 = ''
-        pygame.draw.line(screen, '#EEE2DE', (300, 20), (300, 580), 15)
+        pygame.draw.line(screen, '#EEE2DE', (300, 20), (300, 580), 10)
+
+    elif q3 == q6 == q9 != '':
+        rodadas = 9
+        q3 = ''
+        q6 = ''
+        q9 = ''
+        pygame.draw.line(screen, '#EEE2DE', (500, 20), (500, 580), 10)
+
     pygame.display.flip()
 
     clock.tick(60)  # limita o fps para 60
